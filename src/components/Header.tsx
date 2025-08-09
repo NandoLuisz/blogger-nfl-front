@@ -23,9 +23,14 @@ export default function HeaderAllPosts(){
 
     useEffect(() => {
         const fetchDataCreator = async () => { 
-            const data = await getDataCreatorByToken(); 
+            const data: CreatorResponse | null = await getDataCreatorByToken(); 
             if(!data) return 
-            setCreator(data)
+            setCreator({
+                username: data.username ?? "",
+                imageProfileUrl: data.imageProfileUrl ?? "",
+                id: data.id ?? "",
+                email: data.email ?? ""
+            })
             setCreatorAuthenticated(true)
         }
 

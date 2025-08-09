@@ -1,5 +1,5 @@
 import { CloudUpload } from "lucide-react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { api } from "../../../lib/api";
