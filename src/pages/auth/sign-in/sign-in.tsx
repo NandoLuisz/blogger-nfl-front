@@ -13,7 +13,6 @@ import { AdminContext } from "../../admin/AdminContext";
 import { getDataCreatorByToken } from "../../../api/get-creator-data-by-token";
 import type { CreatorResponse } from "../../../api/get-all-posts";
 
-
 const userLoginFormSchema = z.object({
   username: z.string().min(3, "Usuário deve ter pelo menos 3 caracteres").max(20),
   password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").max(20),
@@ -40,7 +39,6 @@ export default function SignIn() {
   const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
     const result = userLoginFormSchema.safeParse(data);
     if (!result.success) {
-      console.log(result.error.format());
       return;
     }
 
@@ -49,7 +47,6 @@ export default function SignIn() {
       if (response.status === 200) {
         const { token } = response.data;
         setCookie(token)
-        //context?.setAuthenticated(true)
 
         const creatorData = await getDataCreatorByToken<CreatorResponse>();
         if (creatorData) {
@@ -64,7 +61,6 @@ export default function SignIn() {
     } catch (error: any) {
       if (error.response) {
         const errorMessage = error.response.data;
-        console.error(errorMessage);
 
         if (errorMessage === "Usuário não cadastrado.") {
           setError("username", { message: errorMessage });
@@ -74,7 +70,6 @@ export default function SignIn() {
           setError("root", { message: "Erro inesperado ao entrar com usuário." });
         }
       } else {
-        console.error("Erro desconhecido:", error);
         setError("root", { message: "Erro de conexão com o servidor." });
       }
     }

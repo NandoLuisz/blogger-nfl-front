@@ -12,7 +12,7 @@ interface UpdateProfileResponse{
     imageProfileUrl: string
 }
 
-const MAX_FILE_SIZE = 1000000;
+const MAX_FILE_SIZE = 2000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 const profileUpdateFormSchema = z.object({
@@ -22,7 +22,7 @@ const profileUpdateFormSchema = z.object({
     .max(1, "You can only upload one file.")
     .refine(
         (files) => files[0].size <= MAX_FILE_SIZE,
-        `Max file size is 10MB.`
+        `Max file size is 20MB.`
     )
     .refine(
         (files) => ACCEPTED_IMAGE_TYPES.includes(files[0].type),
@@ -60,7 +60,6 @@ export default function UpdateProfilePage(){
         if(!creatorId) return
 
         if (!data.imageProfile || data.imageProfile.length === 0) {
-            console.error("Nenhuma imagem foi enviada.");
             return;
         }
         

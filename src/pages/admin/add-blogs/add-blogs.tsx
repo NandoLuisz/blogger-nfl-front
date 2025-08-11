@@ -11,7 +11,7 @@ import "react-quill-new/dist/quill.snow.css";
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css'
 
-const MAX_FILE_SIZE = 1000000;
+const MAX_FILE_SIZE = 2000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 const postCreateFormSchema = z.object({
@@ -21,7 +21,7 @@ const postCreateFormSchema = z.object({
     .max(1, "You can only upload one file.")
     .refine(
         (files) => files[0].size <= MAX_FILE_SIZE,
-        `Max file size is 10MB.`
+        `Max file size is 20MB.`
     )
     .refine(
         (files) => ACCEPTED_IMAGE_TYPES.includes(files[0].type),
@@ -99,11 +99,11 @@ export default function AddBlog(){
     
                 if(response.status === 200 || response.status === 201) 
                     toast.success("Post feito com sucesso!")
-                    reset(); // limpa campos do RHF
-                    setThumbnail(null); // limpa thumbnail
-                    setEditorContent(""); // limpa editor
+                    reset(); 
+                    setThumbnail(null); 
+                    setEditorContent(""); 
                     if (fileInputRef.current) {
-                        fileInputRef.current.value = ""; // limpa input de arquivo
+                        fileInputRef.current.value = ""; 
                     }
     
             } catch (error: any) {
@@ -158,21 +158,6 @@ export default function AddBlog(){
                 />
                 {errors.title && <span className="text-red-700 text-xs">{errors.title.message}</span>}
             </div>
-            {/* <div className='flex flex-col gap-3 w-full'>
-                <span className='text-lg'>Descrição do Blog</span>
-                <textarea 
-                    {...register("content", 
-                        {required: "Conteúdo obrigatório", 
-                                        minLength: {
-                                        value: 200,
-                                        message: "Conteúdo precisa ter no mínimo 200 caracteres"
-                                        }
-                                        })} 
-                    placeholder='Escreva o conteúdo aqui'
-                    className='w-full h-32 px-3 py-3 border-[0.5px] border-gray-400 outline-none '
-                />
-                {errors.content && <span className="text-red-700 text-xs">{errors.content.message}</span>}
-            </div> */}
             <div className='flex flex-col gap-3 w-full max-md:w-[65%]'>
                 <span className='text-lg'>Descrição do Blog</span>
                 <ReactQuill
