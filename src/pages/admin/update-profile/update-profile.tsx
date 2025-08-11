@@ -98,7 +98,7 @@ export default function UpdateProfilePage(){
             className='w-96 flex flex-col gap-4'
             onSubmit={handleSubmit(onSubmit)}
             >
-            <ToastContainer position="bottom-right" autoClose={2000} />
+            <ToastContainer position="bottom-right" autoClose={3000} />
             <div className='flex flex-col gap-3 w-50'>
                 <span className='text-lg'>Carregue sua foto</span>
                 <div 

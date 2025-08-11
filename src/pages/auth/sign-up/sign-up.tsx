@@ -18,6 +18,14 @@ type RegisterFormFields = z.infer<typeof creatorRegisterFormSchema>
 export default function SingUp(){
 
   const [type, setType] = useState('password');
+  const [signUpSuccess, setSignUpSuccess] = useState<boolean>(false)
+
+  const timeSuccess = () => {
+    setTimeout(() => {
+      setSignUpSuccess(true)
+    }, 2000)
+    setSignUpSuccess(false)
+  }
 
   const 
   { register, 
@@ -43,8 +51,10 @@ export default function SingUp(){
   
     try {
       const response = await api.post("auth/register-creator", JSON.stringify(user))
-      if(response.status === 200)
-      reset()  
+      if(response.status != 400){
+        timeSuccess()
+        reset() 
+      } 
     } catch (error: any) {
       if (error.response && error.response.status === 400) {
         const errorMessage = error.response.data
@@ -106,7 +116,7 @@ export default function SingUp(){
                       {...register("email", 
                           {required: "Email obrigatório!", 
                                                     validate: (value) => {
-                                                      if(!value.includes("@")){
+                                                      if(!value.includes("@") || !value.includes(".com")){
                                                         return "Email precisa ser válido"
                                                       } 
                                                       return true
@@ -156,6 +166,7 @@ export default function SingUp(){
               Ao clicar em registrar, você concorda com os Termos de Serviços 
               e a Política de Privacidade do NFL's Bloggers
           </span>
+          {signUpSuccess && <span className="text-sm text-emerald-500 mt-2 text-center">Cadastrado feito com sucesso!</span>}
           <div className="flex items-center gap-2 text-zinc-600 mt-6">
               <span>Já tem uma conta?</span>
               <Link to="/sign-in">

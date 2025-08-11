@@ -44,7 +44,7 @@ export default function AdminLayout(){
                             key={imageProfileUrl} 
                             src={imageProfileUrl}  
                             alt={username} 
-                            className='rounded-4xl cursor-pointer w-[55px] h-[55px] object-cover'
+                            className='rounded-4xl w-[55px] h-[55px] object-cover'
                             onClick={() => setModalPerfil(!modalPerfil)}/>
                     ): (
                         <img 
@@ -52,7 +52,7 @@ export default function AdminLayout(){
                             width={50} 
                             height={50} 
                             alt="username" 
-                            className='rounded-4xl cursor-pointer' 
+                            className='rounded-4xl' 
                             onClick={() => setModalPerfil(!modalPerfil)}/>
                     )}
                 </div>

@@ -116,7 +116,7 @@ export default function AddBlog(){
             className='w-96 flex flex-col gap-4'
             onSubmit={handleSubmit(onSubmit)}
             >
-            <ToastContainer position="bottom-right" autoClose={2000} />
+            <ToastContainer position="bottom-right" autoClose={3000} />
             <div className='flex flex-col gap-3 w-50'>
                 <span className='text-lg'>Carregue a Miniatura</span>
                 <div 
@@ -187,7 +187,7 @@ export default function AddBlog(){
                     {...register("type")}
                     >
                     <option value="Startups">Startups</option>
-                    <option value="Tecnológia">Tecnológia</option>
+                    <option value="Tecnologia">Tecnologia</option>
                     <option value="Lifestyle">Lifestyle</option>
                 </select>
             </div>
